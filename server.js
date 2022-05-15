@@ -40,16 +40,15 @@ app.get('/api/toy/filter/:filterBy?', (req, res) => {
 // Rest: Post new toy
 app.post('/api/toy', (req, res) => {
 
-    // const cookies = new universalCookie(req.headers.cookie);
-    // const loggedinUser = userService.validateToken(cookies.get('loginToken'))
-    // if (!loggedinUser) return res.status(401).send('Cannot add Toy')
+    const loggedinUser = userService.validateToken(res.req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot add Toy')
 
     // After we pass the checking we add the Toy.
     // over here we take the Toy Obj from url body.
     const toy = req.body
 
     // Save the Toy with service and send back the saved toy to fornt.
-    toyService.save(toy)
+    toyService.save(toy, loggedinUser)
         .then((savedToy) => {
             res.send(savedToy)
         })
@@ -58,13 +57,13 @@ app.post('/api/toy', (req, res) => {
 // Rest: Put Update toy
 app.put('/api/toy/:toyId', (req, res) => {
 
-    // const loggedinUser = userService.validateToken(req.cookies.loginToken)
-    // if (!loggedinUser) return res.status(401).send('Cannot update Toy')
+    const loggedinUser = userService.validateToken(res.req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot update Toy')
 
     // After we pass the checking we update the Toy.
     // over here we take the Toy Obj from url body.
     const toy = req.body
-    toyService.save(toy, loggedinUserId = {isAdmin: true})
+    toyService.save(toy, loggedinUser)
         .then((savedToy) => {
             res.send(savedToy)
         }).catch(err => {
@@ -84,15 +83,15 @@ app.get('/api/toy/:toyId', (req, res) => {
 // Rest: Delete toy from service
 app.delete('/api/toy/:toyId', (req, res) => {
 
-    // const cookies = new universalCookie(req.headers.cookie);
-    // const loggedinUser = userService.validateToken(cookies.get('loginToken'))
-    // if (!loggedinUser) return res.status(401).send('Cannot delete Toy')
+    const loggedinUser = userService.validateToken(res.req.cookies.loginToken)
+    if (!loggedinUser) return res.status(401).send('Cannot delete Toy')
 
     // After we pass the checking we delete the Toy.
     const { toyId } = req.params
 
+
     //HERE WE HANDLE THE PREMMISION IN SERVICE!
-    toyService.remove(toyId, loggedinUserId = {isAdmin: true})
+    toyService.remove(toyId, loggedinUser)
         .then(() => {
             res.send('Removed Succesfully')
         })
@@ -147,10 +146,6 @@ app.post('/api/login', (req, res) => {
                 user.password === credentials.password) {
                 // loginToken: send back a cookie with user token
                 const loginToken = userService.getLoginToken(user)
-
-                // const cookies = new universalCookie(req.headers.cookie);
-                // cookies.set('loginToken', loginToken, { path: '/' });
-                // console.log(cookies.get('loginToken'));
                 res.cookie('loginToken', loginToken)
                 // console.log('loginToken', req.cookies.loginToken);
                 res.send(user)
@@ -173,9 +168,7 @@ app.post('/api/signup', (req, res) => {
             if (user) {
                 // loginToken: send back a cookie with user token
                 const loginToken = userService.getLoginToken(user)
-                // const cookies = new universalCookie(req.headers.cookie);
-                // cookies.set('loginToken', loginToken, { path: '/' });
-                // console.log(cookies.get('loginToken'));
+                res.cookie('loginToken', loginToken)
 
                 res.send(user)
             } else {

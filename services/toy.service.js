@@ -53,24 +53,19 @@ function remove(toyId, loggedinUserId) {
 
 }
 
-function save(toy, loggedinUserId = '') {
-    // if ture Update
-    if (toy._id) {
-        const idx = gToys.findIndex(currToy => currToy._id === toy._id)
-        // Check if the creator id of the toy he is the loged user that try to delete the toy
-
-        if (loggedinUserId.isAdmin) {
+function save(toy, loggedinUserId) {
+    if (loggedinUserId.isAdmin) {
+        if (toy._id) {
+            const idx = gToys.findIndex(currToy => currToy._id === toy._id)
             gToys[idx] = toy
         } else {
-            return Promise.reject('Not your Toy')
+            toy._id = utilService.makeId()
+            gToys.push(toy)
         }
-
-        // if false add new
     } else {
-        toy._id = utilService.makeId()
-        gToys.push(toy)
-        // the Creator i add in the front!
+        return Promise.reject('Not your Toy')
     }
+    
     return _saveToysToFile().then(() => toy)
 }
 

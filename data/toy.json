@@ -39,19 +39,6 @@
     "_id": "5Kfhf"
   },
   {
-    "name": "Toy No:208",
-    "img": 2,
-    "price": 108,
-    "labels": [
-      "Doll",
-      "Outdoor",
-      "Baby"
-    ],
-    "createdAt": 1652014396317,
-    "inStock": false,
-    "_id": "eXer5"
-  },
-  {
     "name": "Toy No:9",
     "img": 11,
     "price": 81,
@@ -67,26 +54,26 @@
   {
     "name": "Toy No:959",
     "img": 11,
-    "price": 132,
+    "price": 133,
     "labels": [
       "Doll",
       "Outdoor",
       "Baby"
     ],
-    "createdAt": 1652015554246,
+    "createdAt": 1651968000000,
     "inStock": true,
     "_id": "KYlEj"
   },
   {
     "name": "Toy No:877",
     "img": 7,
-    "price": 121,
+    "price": 122,
     "labels": [
       "Doll",
       "Outdoor",
       "Baby"
     ],
-    "createdAt": 1651843831349,
+    "createdAt": 1651795200000,
     "inStock": false,
     "_id": "KHn1I"
   },

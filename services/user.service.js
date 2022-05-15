@@ -60,6 +60,7 @@ function addUser(credentials) {
         username: credentials.username,
         password: credentials.password,
         credit: credentials.credit,
+        cart:  credentials.cart,
         isAdmin: false
     })
     _saveUsersToFile()
@@ -82,9 +83,8 @@ function _saveUsersToFile() {
 
 function remove(userId, loggedinUserId) {
     const idx = gUsers.findIndex(user => user._id === userId)
-    const isGotToys = toyService.isUsersGotToys(userId)
 
-    if (loggedinUserId.isAdmin && !isGotToys) {
+    if (loggedinUserId.isAdmin) {
         // Delete from JSON
         gUsers.splice(idx, 1)
         return _saveUsersToFile().then(() => gUsers)

@@ -143,7 +143,7 @@ app.post('/api/login', (req, res) => {
                 // const cookies = new universalCookie(req.headers.cookie);
                 // cookies.set('loginToken', loginToken, { path: '/' });
                 // console.log(cookies.get('loginToken'));
-                // res.cookie('loginToken', loginToken)
+                //res.cookie('loginToken', loginToken)
                 // console.log('loginToken', req.cookies.loginToken);
                 res.send(user)
             } else {

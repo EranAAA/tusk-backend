@@ -169,7 +169,6 @@ app.post('/api/signup', (req, res) => {
                 // loginToken: send back a cookie with user token
                 const loginToken = userService.getLoginToken(user)
                 res.cookie('loginToken', loginToken)
-
                 res.send(user)
             } else {
                 res.status(401).send('Invalid Credentials')

@@ -60,10 +60,12 @@
     "credit": 1000,
     "cart": [],
     "isAdmin": false
+  },
+  {
+    "_id": "aTsFT",
+    "fullname": "Stam Kaka",
+    "username": "kaka",
+    "password": "1234",
+    "isAdmin": false
   }
 ]
-
-
-
-
-

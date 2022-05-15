@@ -1,0 +1,64 @@
+[
+  {
+    "_id": "abcde",
+    "username": "admin",
+    "password": "admin",
+    "fullname": "Admin",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": true
+  },
+  {
+    "_id": "u101",
+    "username": "eran",
+    "password": "1234",
+    "fullname": "Eran Avichzer",
+    "cart": [],
+    "isAdmin": false
+  },
+  {
+    "_id": "u102",
+    "username": "hen",
+    "password": "1234",
+    "fullname": "Hen Sender",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": false
+  },
+  {
+    "_id": "u103",
+    "username": "danielle",
+    "password": "1234",
+    "fullname": "Danielle Avichzer",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": false
+  },
+  {
+    "_id": "Z0CpB",
+    "username": "aviv",
+    "password": "1111",
+    "fullname": "Aviv Avichzer",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": false
+  },
+  {
+    "_id": "Z0hpB",
+    "username": "abigail",
+    "password": "1111",
+    "fullname": "Abigail Avichzer",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": false
+  },
+  {
+    "_id": "VOb0w",
+    "fullname": "Israel Israeli",
+    "username": "israel",
+    "password": "1234",
+    "credit": 1000,
+    "cart": [],
+    "isAdmin": false
+  }
+]

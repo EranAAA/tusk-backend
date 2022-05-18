@@ -76,8 +76,10 @@ async function add(review) {
         const reviewToAdd = {
             byUserId: ObjectId(review.byUserId),
             aboutToyId: ObjectId(review.aboutToyId),
-            content: review.content
+            content: review.content,
+            star: review.star || 0
         }
+        
         const collection = await dbService.getCollection('review')
         await collection.insertOne(reviewToAdd)
         return reviewToAdd;

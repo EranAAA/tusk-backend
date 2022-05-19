@@ -4,11 +4,11 @@ const ObjectId = require('mongodb').ObjectId
 
 async function query(filterBy) {
    try {
-
-      const stock = (filterBy.stock === 'true') ? true : ((filterBy.stock === 'false') ? false : '')
-
+      const criteria = _buildCriteria(filterBy)
+      const criteriaSort = _buildCriteriaSort(filterBy)
       const collection = await dbService.getCollection('toy')
-      var toys = await collection.find(stock && ({ inStock: stock })).toArray()
+
+      var toys = await collection.find(criteria).sort(criteriaSort).toArray()
       return toys
    } catch (err) {
       logger.error('cannot find toys', err)
@@ -64,36 +64,58 @@ async function update(toy) {
 }
 
 function _buildCriteria(filterBy) {
+
    const criteria = {}
-   // if (filterBy.name) {
-   //     const nameCriteria = { $regex: filterBy.name, $options: 'i' }
-   //     criteria.name = { nameCriteria } 
+
+   const stock = (filterBy.stock === 'true') ? true : ((filterBy.stock === 'false') ? false : '')
+   const selectedOption = filterBy.selectedOption ? filterBy.selectedOption.map(({ value, ...rest }) => value) : []
+
+   if (filterBy.name) {
+      criteria.name = { $regex: filterBy.name, $options: 'i' }
+   }
+
+   if (filterBy.stock === 'true' || filterBy.stock === 'false') {
+      criteria.inStock = stock
+   }
+
+   // if (filterBy.selectedOption) {
+   //    criteria.labels = { selectedOption }
    // }
 
-   if (filterBy.stock) {
-      criteria.stock = { $gte: filterBy.minBalance }
-   }
+   console.log('criteria', criteria);
+   console.log('filterBy', filterBy);
 
    return criteria
 }
 
-// if (filterBy) {
-//    if (filterBy.name) toys = toys.filter(toy => toy.name.includes(filterBy.name))
-//    if (filterBy.stock === 'true' || filterBy.stock === 'false') {
-//        toys = toys.filter(toy => {
-//            const isInStock = toy.inStock ? 'true' : 'false'
-//            return isInStock === filterBy.stock
-//        })
-//    }
-//    const selectedOption = filterBy.selectedOption ? filterBy.selectedOption.map(({value,...rest}) => value) : []
-//    if (selectedOption.length) toys = toys.filter(toy => toy.labels.join(' ').includes(selectedOption.join(' ')))
-//    if (filterBy.sort === 'Lower') toys = toys.sort((a, b) => a.price - b.price)
-//    if (filterBy.sort === 'Higher') toys = toys.sort((a, b) => b.price - a.price)
-//    if (filterBy.sort === 'Newest') toys = toys.sort((a, b) => b.createdAt - a.createdAt)
-//    if (filterBy.sort === 'Oldest') toys = toys.sort((a, b) => a.createdAt - b.createdAt)
-// } else {
-//    toys = toys.sort((a, b) => b.createdAt - a.createdAt)
-// }
+function _buildCriteriaSort(filterBy) {
+
+   const criteria = {}
+
+   if (filterBy.sort === 'Higher') {
+      criteria.price = -1
+   }
+
+   if (filterBy.sort === 'Lower') {
+      criteria.price = 1
+   }
+
+   if (filterBy.sort === 'Newest') {
+      criteria.createdAt = -1
+   }
+
+   if (filterBy.sort === 'Oldest') {
+      criteria.createdAt = 1
+   }
+
+   if (!Object.keys(criteria).length) {
+      criteria.createdAt = -1
+   }
+
+   console.log('criteriaSort', criteria);
+
+   return criteria
+}
 
 module.exports = {
    remove,

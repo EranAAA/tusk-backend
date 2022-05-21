@@ -66,16 +66,14 @@ async function update(toy) {
 function _buildCriteria(filterBy) {
 
    const criteria = {}
-
-   const stock = (filterBy.stock === 'true') ? true : ((filterBy.stock === 'false') ? false : '')
    const selectedOption = filterBy.selectedOption ? filterBy.selectedOption.map(({ value, ...rest }) => value) : []
 
    if (filterBy.name) {
       criteria.name = { $regex: filterBy.name, $options: 'i' }
    }
 
-   if (filterBy.stock === 'true' || filterBy.stock === 'false') {
-      criteria.inStock = stock
+   if (filterBy.stock || filterBy.stock === false) {
+      criteria.inStock = filterBy.stock
    }
 
    // if (filterBy.selectedOption) {
@@ -83,7 +81,7 @@ function _buildCriteria(filterBy) {
    // }
 
    // console.log('criteria', criteria);
-   // console.log('filterBy', filterBy);
+   console.log('filterBy', filterBy);
 
    return criteria
 }

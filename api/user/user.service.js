@@ -72,9 +72,10 @@ async function update(user) {
             fullname: user.fullname,
             credit: user.credit,
             cart: user.cart,
-
         }
+
         const collection = await dbService.getCollection('user')
+        console.log('user', user);
         await collection.updateOne({ '_id': userToSave._id }, { $set: userToSave })
         return userToSave;
     } catch (err) {

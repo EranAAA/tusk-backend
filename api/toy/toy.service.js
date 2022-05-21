@@ -20,7 +20,7 @@ async function getById(toyId) {
    try {
       const collection = await dbService.getCollection('toy')
       const toy = collection.findOne({ _id: ObjectId(toyId) })
-      console.log('toy', toy);
+      // console.log('toy', toy);
       return toy
    } catch (err) {
       logger.error(`while finding toy ${toyId}`, err)
@@ -82,8 +82,8 @@ function _buildCriteria(filterBy) {
    //    criteria.labels = { selectedOption }
    // }
 
-   console.log('criteria', criteria);
-   console.log('filterBy', filterBy);
+   // console.log('criteria', criteria);
+   // console.log('filterBy', filterBy);
 
    return criteria
 }
@@ -112,7 +112,7 @@ function _buildCriteriaSort(filterBy) {
       criteria.createdAt = -1
    }
 
-   console.log('criteriaSort', criteria);
+   //console.log('criteriaSort', criteria);
 
    return criteria
 }

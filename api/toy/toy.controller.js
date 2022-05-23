@@ -1,5 +1,6 @@
 const toyService = require('./toy.service.js');
 const logger = require('../../services/logger.service')
+const socketService = require('../../services/socket.service')
 
 // GET LIST
 async function getToys(req, res) {
@@ -45,6 +46,8 @@ async function updateToy(req, res) {
     const toy = req.body;
     const updatedToy = await toyService.update(toy)
     res.json(updatedToy)
+    // socketService.broadcast({type: 'toy-edited', data: toy, userId: toy._id})
+
   } catch (err) {
     logger.error('Failed to update toy', err)
     res.status(500).send({ err: 'Failed to update toy' })

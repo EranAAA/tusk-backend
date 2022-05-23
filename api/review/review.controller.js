@@ -52,10 +52,12 @@ async function addReview(req, res) {
         const loginToken = authService.getLoginToken(loggedinUser)
         res.cookie('loginToken', loginToken)
 
-        // const fullUser = await userService.getById(loggedinUser._id)
-        // socketService.broadcast({type: 'review-added', data: review, userId: review.byUserId})
-        // socketService.emitToUser({type: 'review-about-you', data: review, userId: review.aboutToyId})
-        // socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
+         // SOCKET //
+        const fullUser = await userService.getById(loggedinUser._id)
+        socketService.broadcast({type: 'review-added', data: review, userId: review.byUserId})
+        socketService.emitToUser({type: 'review-about-you', data: review, userId: review.aboutUserId})
+        socketService.emitTo({type: 'user-updated', data: fullUser, label: fullUser._id})
+         // SOCKET //
 
         res.send(review)
 

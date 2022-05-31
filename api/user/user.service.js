@@ -69,9 +69,7 @@ async function update(user) {
         const userToSave = {
             _id: ObjectId(user._id),
             username: user.username,
-            fullname: user.fullname,
-            credit: user.credit,
-            cart: user.cart,
+            fullname: user.fullname
         }
 
         const collection = await dbService.getCollection('user')
@@ -91,8 +89,7 @@ async function add(user) {
             username: user.username,
             password: user.password,
             fullname: user.fullname,
-            credit: 1000,
-            cart: [],
+            imgURL: '',
             isAdmin: false
         }
         const collection = await dbService.getCollection('user')

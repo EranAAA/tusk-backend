@@ -5,6 +5,8 @@ var gIo = null
 
 function setupSocketAPI(http) {
 
+   console.log('***************socket***************');
+
    gIo = require('socket.io')(http, {
       cors: {
          origin: '*',
@@ -33,11 +35,26 @@ function setupSocketAPI(http) {
          // gIo.emit('chat addMsg', msg)
          // emits only to sockets in the same room
          gIo.to(socket.myTopic).emit('chat addMsg', msg)
+         // broadcast({
+         //    type: 'chat addMsg',
+         //    date: msg,
+         //    room: socket.myTopic,
+         //    userId: socket.userId
+         // })
       })
+
+
+      socket.on('emit-any-change', msg => {
+         logger.info(`New chat msg start typing from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`)
+         socket.broadcast.emit('on-any-change', msg)
+         console.log('***************socket***************');
+      })
+
 
       socket.on('type newMsg', msg => {
          logger.info(`New chat msg start typing from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`)
-         gIo.to(socket.myTopic).emit('type addMsg', msg)
+         socket.broadcast.to(socket.myTopic).emit('type addMsg', msg)
+         // gIo.broadcast.to(socket.myTopic).emit('type addMsg', msg)
       })
 
       socket.on('user-watch', userId => {

@@ -29,21 +29,21 @@ async function query(filterBy = {}) {
             {
                 $lookup:
                 {
-                    localField: 'aboutToyId',
-                    from: 'toy',
+                    localField: 'aboutBoardId',
+                    from: 'board',
                     foreignField: '_id',
-                    as: 'aboutToy'
+                    as: 'aboutBoard'
                 }
             },
             {
-                $unwind: '$aboutToy'
+                $unwind: '$aboutBoard'
             }
         ]).toArray()
         reviews = reviews.map(review => {
             review.byUser = { _id: review.byUser._id, fullname: review.byUser.fullname }
-            review.aboutToy = { _id: review.aboutToy._id, name: review.aboutToy.name, price: review.aboutToy.price  }
+            review.aboutBoard = { _id: review.aboutBoard._id, name: review.aboutBoard.name, price: review.aboutBoard.price  }
             delete review.byUserId
-            delete review.aboutToyId
+            delete review.aboutBoardId
             return review
         })
 
@@ -75,7 +75,7 @@ async function add(review) {
     try {
         const reviewToAdd = {
             byUserId: ObjectId(review.byUserId),
-            aboutToyId: ObjectId(review.aboutToyId),
+            aboutBoardId: ObjectId(review.aboutBoardId),
             content: review.content,
             star: review.star || 0
         }

@@ -6,59 +6,63 @@ async function query(filterBy) {
    try {
       const criteria = _buildCriteria(filterBy)
       const criteriaSort = _buildCriteriaSort(filterBy)
-      const collection = await dbService.getCollection('toy')
+      const collection = await dbService.getCollection('board')
 
-      var toys = await collection.find(criteria).sort(criteriaSort).toArray()
-      return toys
+      console.log('query', collection);
+
+      var boards = await collection.find(criteria).sort(criteriaSort).toArray()
+      return boards
    } catch (err) {
-      logger.error('cannot find toys', err)
+      logger.error('cannot find boards', err)
       throw err
    }
 }
 
-async function getById(toyId) {
+async function getById(boardId) {
+
    try {
-      const collection = await dbService.getCollection('toy')
-      const toy = collection.findOne({ _id: ObjectId(toyId) })
-      // console.log('toy', toy);
-      return toy
+      const collection = await dbService.getCollection('board')
+      const board = collection.findOne({ _id: ObjectId(boardId) })
+      // const board = collection.findOne({ _id: (boardId) })
+      // console.log('board', board);
+      return board
    } catch (err) {
-      logger.error(`while finding toy ${toyId}`, err)
+      logger.error(`while finding board ${boardId}`, err)
       throw err
    }
 }
 
-async function remove(toyId) {
+async function remove(boardId) {
    try {
-      const collection = await dbService.getCollection('toy')
-      await collection.deleteOne({ _id: ObjectId(toyId) })
-      return toyId
+      const collection = await dbService.getCollection('board')
+      await collection.deleteOne({ _id: ObjectId(boardId) })
+      return boardId
    } catch (err) {
-      logger.error(`cannot remove toy ${toyId}`, err)
+      logger.error(`cannot remove board ${boardId}`, err)
       throw err
    }
 }
 
-async function add(toy) {
+async function add(board) {
    try {
-      const collection = await dbService.getCollection('toy')
-      const addedToy = await collection.insertOne(toy)
-      return addedToy.ops[0]
+      const collection = await dbService.getCollection('board')
+      const addedBoard = await collection.insertOne(board)
+      return addedBoard.ops[0]
    } catch (err) {
-      logger.error('cannot insert toy', err)
+      logger.error('cannot insert board', err)
       throw err
    }
 }
 
-async function update(toy) {
+async function update(board) {
    try {
-      var id = ObjectId(toy._id)
-      delete toy._id
-      const collection = await dbService.getCollection('toy')
-      await collection.updateOne({ _id: id }, { $set: { ...toy } })
-      return toy
+      var id = ObjectId(board._id)
+      delete board._id
+      const collection = await dbService.getCollection('board')
+      await collection.updateOne({ _id: id }, { $set: { ...board } })
+      return board
    } catch (err) {
-      logger.error(`cannot update toy ${toyId}`, err)
+      logger.error(`cannot update board ${boardId}`, err)
       throw err
    }
 }

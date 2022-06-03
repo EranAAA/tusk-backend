@@ -33,7 +33,7 @@ function setupSocketAPI(http) {
 
     socket.on('board-activity', (board) => {
       logger.info(
-        `New board activity from socket [id: ${socket.id}], emitting to topic ${socket.myTopic}`
+        `New board activity by socket [id: ${socket.id}], in board ${socket.myTopic}`
       )
       socket.broadcast.to(socket.myTopic).emit('board-activity', board)
     })

@@ -1,5 +1,6 @@
 const express = require('express')
 const cookieParser = require('cookie-parser')
+const webpush = require('web-push')
 const cors = require('cors')
 const path = require('path')
 
@@ -28,6 +29,17 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors(corsOptions))
 }
 
+const publicVapidKey =
+  'BPUHO5He7zwfoc4fDv0L4g6iQTtflaWmQpeOmSzivcgIrRtfSuNqA8BFx1PMECJw73pIRYHbewwsRXp1jAjlS08'
+const privateVapidKey = 'G5sGXesC0JuiOoZXt8RJ0uLlJFoARmRygrQkrtjiXSA'
+
+webpush.setVapidDetails(
+  'mailto:tusk.incorporated@gmail.com',
+  publicVapidKey,
+  privateVapidKey
+)
+
+const notificationRoutes = require('./api/notification/notification.routes')
 const authRoutes = require('./api/auth/auth.routes')
 const userRoutes = require('./api/user/user.routes')
 const boardRoutes = require('./api/board/board.routes')
@@ -40,6 +52,7 @@ app.all('*', setupAsyncLocalStorage)
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/board', boardRoutes)
+app.use('/api/notification', notificationRoutes)
 
 setupSocketAPI(http)
 

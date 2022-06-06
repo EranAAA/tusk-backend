@@ -4,6 +4,7 @@ const webpush = require('web-push')
 const router = express.Router()
 
 router.post('/subscribe', (req, res) => {
+  console.log('here')
   // Get pushSubscription object
   const subscription = req.body
 

@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.acd30209.css",
-    "main.js": "/static/js/main.f1952b6d.js",
+    "main.css": "/static/css/main.bf93d4bf.css",
+    "main.js": "/static/js/main.d9cb2ea3.js",
+    "static/media/demo.png": "/static/media/demo.c0db0a07b05b200dbb4f.png",
     "static/media/SourceSansPro-Regular.ttf": "/static/media/SourceSansPro-Regular.df87f53caf449a3b7572.ttf",
     "static/media/SourceSansPro-SemiBold.ttf": "/static/media/SourceSansPro-SemiBold.f2fa8f369db189665539.ttf",
     "static/media/hero.png": "/static/media/hero.e8878a5487f1b4b94d6f.png",
@@ -11,14 +12,13 @@
     "service-worker.js": "/service-worker.js",
     "static/media/SecularOne-Regular.ttf": "/static/media/SecularOne-Regular.141c1f3e034514617e8b.ttf",
     "static/media/svg2.svg": "/static/media/svg2.df08073f2685e0d50554315cbd5d6217.svg",
-    "static/media/BounceBarPreloader.gif": "/static/media/BounceBarPreloader.b1c1f800b38c2fb953c5.gif",
     "static/media/previewboard.svg": "/static/media/previewboard.8b3363dc291c5b86121aab57de177239.svg",
     "index.html": "/index.html",
-    "main.acd30209.css.map": "/static/css/main.acd30209.css.map",
-    "main.f1952b6d.js.map": "/static/js/main.f1952b6d.js.map"
+    "main.bf93d4bf.css.map": "/static/css/main.bf93d4bf.css.map",
+    "main.d9cb2ea3.js.map": "/static/js/main.d9cb2ea3.js.map"
   },
   "entrypoints": [
-    "static/css/main.acd30209.css",
-    "static/js/main.f1952b6d.js"
+    "static/css/main.bf93d4bf.css",
+    "static/js/main.d9cb2ea3.js"
   ]
 }
